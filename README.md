@@ -75,7 +75,9 @@ _Para crear un pedido tendrás que llenar el siguiente esquema en el body:_
 
 De la siguiente manera:
 
-* El vector "nombres" se puede llenar con tantos nombres de productos como se desee, aunque hay 8 en el sistema, se pueden repetir, siempre y cuando estos existan dentro de la lista de productos, también es importante recalcar que se debe respetar la escritura, cualquier producto escrito de mala manera, hará que el programa presente un error del tipo: _cannot calculated price of undefined_.
+* Lo primero a saber, esta API distingue por id y no por usuario loggeado, entonces, para crear un pedido deberás llenar el body y escribir la id del usuario al que quieras asignarle el pedido, en la ruta de historial se podrán ver los pedidos realizados por usuario, y la ruta para administradores mostrará todos los pedidos sin importar el usurio, los usuarios nuevos podrán ver su id en la ruta de usuarios, ruta donde también se podrá observar el id de los usuarios existentes. 
+
+* Para el body, el vector "nombres" se puede llenar con tantos nombres de productos como se desee, aunque hay 8 en el sistema, se pueden repetir, siempre y cuando estos existan dentro de la lista de productos, también es importante recalcar que se debe respetar la escritura, cualquier producto escrito de mala manera, hará que el programa presente un error del tipo: _cannot calculated price of undefined_.
 
 * El vector "cantidades" tiene que tener la misma longitud del vector "nombres", es decir, cada producto escrito en el vector "nombres" debe tener su cantidad correspondiente.
 
