@@ -15,7 +15,7 @@ API REST en la cuál encontrarás funciones como:
 
 _Estas instrucciones te permitirán correr el proyecto y realizar las pruebas correspondientes._
 
-1. Descarga el repositorio en este [link](https://gitlab.com/jimalaros/dwbe-tale-01/-/new/master/PROYECTO) e instala los packages como se muestra a continuación.
+1. Descarga el repositorio en este [link](https://github.com/jimalaros/proyecto) e instala los packages como se muestra a continuación.
 
 ```
 npm install
@@ -91,4 +91,4 @@ De la siguiente manera:
 
 _Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
 
-* **Jimmy Alexander Arango Ossa** - *Link* - [jimalaros](https://gitlab.com/jimalaros/dwbe-tale-01/-/new/master/PROYECTO)
+* **Jimmy Alexander Arango Ossa** - *Link* - [jimalaros](https://github.com/jimalaros/proyecto)
