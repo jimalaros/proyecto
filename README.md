@@ -89,6 +89,4 @@ De la siguiente manera:
 
 ## Autores ✒️
 
-_Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
-
 * **Jimmy Alexander Arango Ossa** - *Link* - [jimalaros](https://github.com/jimalaros/proyecto)
