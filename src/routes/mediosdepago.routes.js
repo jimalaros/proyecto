@@ -4,7 +4,7 @@ const {EsAdministrador} = require('../middlewares/Administrador.middleware');
 const { MostrarMediosdePago, RegistrarMediosdePago } = require('../models/mediosdepago.models');
 
 router.get('/', EsAdministrador, (req,res) => {
-    res.sendStatus(200).json(MostrarMediosdePago());
+    res.json(MostrarMediosdePago());
 });
 
 router.post('/', EsAdministrador, (req,res) => {
@@ -28,23 +28,22 @@ router.put('/EditarMedioDePago/:id', EsAdministrador, (req, res) => {
         const payment = MostrarMediosdePago().find(p => p.id === id)
             if (payment) {
                 payment.mediodepago = mediodepago;
-                const Editado = {mediodepago};
-                res.sendStatus(200).json(MostrarMediosdePago(Editado));
+                res.sendStatus(200).json({msg: 'Medio de pago editado con exito'});
             }
             else
             {
-                res.sendStatus(400).json('Identificador no encontrado en los medios de pago existentes')
+                res.sendStatus(400).json({err: 'No se encontro el medio de pago'})
             }
         
     } else {
-        res.sendStatus(204).json({msg: 'Faltan campos por llenar'});
+        res.sendStatus(204).json({err: 'Faltan campos por llenar'});
     }
 });
 
 router.delete('/EliminarMedioDePago/:id', EsAdministrador, (req, res) => {
     const id = Number(req.params.id)
     const Mediosdepago = MostrarMediosdePago().filter(u => u.id != id)
-    res.sendStatus(200).json('El medio de pago eliminado: ',Mediosdepago)
+    res.sendStatus(200).json({msg:'El medio de pago eliminado: ', Mediosdepago})
 });
 
 module.exports = router;
