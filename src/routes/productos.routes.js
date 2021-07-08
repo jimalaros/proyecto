@@ -6,7 +6,7 @@ const {EsAdministrador} = require('../middlewares/Administrador.middleware')
 const { mostrarProductos, registrarProductos } = require('../models/productos.models');
 
 router.get('/', (req, res) => {
-    res.sendStatus(200).json(mostrarProductos());
+    res.json(mostrarProductos());
 });
 
 router.post('/nuevos', EsAdministrador, (req, res) => {
@@ -16,20 +16,20 @@ router.post('/nuevos', EsAdministrador, (req, res) => {
         const name = mostrarProductos().find(p => p.articulo === nombree);
         if(name)
         {
-            res.sendStatus(400).json('El producto ya se encuentra registrado');
+            res.sendStatus(400).json({err: 'El producto ya se encuentra registrado'});
         }
         else
         {
             const Nuevo = {name, precio}
             registrarProductos(Nuevo)
-            res.sendStatus(201).json(mostrarProductos());
+            res.sendStatus(201).json({msg:'Producto creado con exito'});
         }
         
     }
     else res.sendStatus(204).json({err: 'Faltan datos'});
 });
 
- router.put('/:id', EsAdministrador, (req, res) => {
+router.put('/:id', EsAdministrador, (req, res) => {
     const id = Number(req.params.id);
     const { nombre, precio, } = req.body;
     if (nombre && precio) 
@@ -40,20 +40,23 @@ router.post('/nuevos', EsAdministrador, (req, res) => {
             producto.nombre = nombre;
             producto.precio = precio;
             producto.descripcion = descripcion;
-            res.sendStatus(200).json(mostrarProductos());
+            res.sendStatus(200).json({msg: 'producto editado con exito'});
         }
         else {
-            res.status(204).json({msg: 'No se ha encontrado el producto'});
+            res.status(204).json({err: 'No se ha encontrado el producto'});
         } 
     } else {
-        res.status(204).json({msg: 'Faltan campos por llenar'});
+        res.status(204).json({err: 'Faltan campos por llenar'});
     }
 });
 
  router.delete('/Eliminar/:id', EsAdministrador, (req, res) => {
-    const id = Number(req.params.id)
-    const Productos = mostrarProductos().filter(u => u.id != id)
-    res.sendStatus(200).json(Productos)
+    const id = Number(req.params.id);
+    const Productos = mostrarProductos().filter(u => u.id != id);
+    if(Productos)
+    {
+        res.sendStatus(200).json({msg: 'Producto eliminado correctamente'});
+    }
 });
 
 module.exports = router;
