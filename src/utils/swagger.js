@@ -41,7 +41,7 @@ const swaggerOptions = {
             "description": "Todos los usuarios registrados en el sistema",
             "responses": {
               "200": {
-                "description": "Devuelve los usuarios",
+                "description": "Ok",
                 "content": {
                   "application/json": {
                     "schema": {
@@ -72,13 +72,52 @@ const swaggerOptions = {
             },
             "responses": {
               "201": {
-                "description": "Usuario creado con exito"
+                "description": "Created",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "msg": {
+                          "type": "string",
+                          "example": "Usuario creado con exito"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "204": {
-                "description": "Faltan datos"
+                "description": "No Content",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "msg": {
+                          "type": "string",
+                          "example": "Faltan datos"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "400": {
-                "description": "El correo ya esta registrado"
+                "description": "Bad Request",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "El correo ya esta en uso"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -112,10 +151,36 @@ const swaggerOptions = {
             ],
             "responses": {
               "200": {
-                "description": "Sesión iniciada con exito"
+                "description": "Ok",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "msg": {
+                          "type": "string",
+                          "example": "Sesión iniciada con exito"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "204": {
-                "description": "Usuario no encontrado, Faltan datos"
+                "description": "No Content",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "Faltan datos"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -129,7 +194,7 @@ const swaggerOptions = {
             "description": "Ver los productos registrados en el sistema",
             "responses": {
               "200": {
-                "description": "Devuelve los productos",
+                "description": "Ok",
                 "content": {
                   "application/json": {
                     "schema": {
@@ -159,13 +224,68 @@ const swaggerOptions = {
             },
             "responses": {
               "201": {
-                "description": "Producto creado con exito"
+                "description": "Created",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "msg": {
+                          "type": "string",
+                          "example": "Producto creado con exito"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "204": {
-                "description": "Faltan datos"
+                "description": "No Content",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "Faltan datos"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "400": {
-                "description": "El producto ya existe"
+                "description": "Bad Request",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "El producto ya fue creado"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "401": {
+                "description": "Unauthorized",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "No eres administrador"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -199,13 +319,52 @@ const swaggerOptions = {
             },
             "responses": {
               "200": {
-                "description": "Producto editado con exito"
+                "description": "Ok",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "msg": {
+                          "type": "string",
+                          "example": "La edición fue un exito"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "204": {
-                "description": "No se ha encontrado el producto, Faltan datos por llenar"
+                "description": "No Content",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "Faltan datos"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "401": {
-                "description": "No eres administrador"
+                "description": "Unauthorized",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "No eres administrador"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -231,13 +390,52 @@ const swaggerOptions = {
             ],
             "responses": {
               "200": {
-                "description": "Producto eliminado"
+                "description": "Ok",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "msg": {
+                          "type": "string",
+                          "example": "Producto eliminado correctamente"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "204": {
-                "description": "Faltan datos"
+                "description": "No Content",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "Faltan datos"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "401": {
-                "description": "No eres administrador"
+                "description": "Unauthorized",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "No eres administrador"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -251,17 +449,43 @@ const swaggerOptions = {
             "description": "Los administradores podrán ver todos los pedidos registrados en el sistema",
             "responses": {
               "200": {
-                "description": "Devuelve los pedidos"
-              },
-              "204": {
-                "description": "No hay pedidos para mostrar"
-              },
-              "401": {
-                "description": "No eres administrador",
+                "description": "Ok",
                 "content": {
                   "application/json": {
                     "schema": {
                       "$ref": "#/components/schemas/Pedido"
+                    }
+                  }
+                }
+              },
+              "204": {
+                "description": "No Content",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "Faltan datos"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "401": {
+                "description": "Unauthorized",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "No eres administrador"
+                        }
+                      }
                     }
                   }
                 }
@@ -290,10 +514,30 @@ const swaggerOptions = {
             ],
             "responses": {
               "200": {
-                "description": "Devuelve los pedidos hechos por los usuarios según su id"
+                "description": "Ok",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Pedidoxid"
+                    }
+                  }
+                }
               },
               "204": {
-                "description": "No hay pedidos para mostrar"
+                "description": "No Content",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "Faltan datos"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -328,10 +572,36 @@ const swaggerOptions = {
             },
             "responses": {
               "201": {
-                "description": "Pedido creado con exito"
+                "description": "Created",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "msg": {
+                          "type": "string",
+                          "example": "Pedido creado con exito"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "204": {
-                "description": "Faltan datos"
+                "description": "No Content",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "Faltan datos"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -364,19 +634,58 @@ const swaggerOptions = {
               }
             },
             "responses": {
-              "201": {
-                "description": "Pedido editado con exito"
+              "200": {
+                "description": "Ok",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "msg": {
+                          "type": "string",
+                          "example": "Pedido editado con exito"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "204": {
-                "description": "No se encontro el pedido, no hay suficientes datos"
+                "description": "No Content",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "Faltan datos"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "400": {
-                "description": "El estado del pedido es \"cerrado\", no se puede editar el pedido"
+                "description": "Bad Request",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "El estado de su pedido es cerrado, no puede ser editado"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
         },
-        "/EstadoPedido/{id}": {
+        "/estadoPedido/{id}": {
           "put": {
             "tags": [
               "Pedidos"
@@ -405,10 +714,36 @@ const swaggerOptions = {
             },
             "responses": {
               "200": {
-                "description": "Pedido editado con exito"
+                "description": "Ok",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "msg": {
+                          "type": "string",
+                          "example": "Estado editado con exito"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "401": {
-                "description": "No eres administrador"
+                "description": "Unauthorized",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "No eres administrador"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -422,14 +757,27 @@ const swaggerOptions = {
             "description": "Para que los administradores vean los medios de pago registrados en el sistema",
             "responses": {
               "200": {
-                "description": "Devuelve los medios de pago"
-              },
-              "401": {
-                "description": "No eres administrador",
+                "description": "Ok",
                 "content": {
                   "application/json": {
                     "schema": {
                       "$ref": "#/components/schemas/MedioDePago"
+                    }
+                  }
+                }
+              },
+              "401": {
+                "description": "Unauthorized",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "No eres administrador"
+                        }
+                      }
                     }
                   }
                 }
@@ -453,13 +801,52 @@ const swaggerOptions = {
             },
             "responses": {
               "201": {
-                "description": "Medio de pago creado con exito"
+                "description": "Created",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "msg": {
+                          "type": "string",
+                          "example": "Pedido creado con exito"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "204": {
-                "description": "Faltan datos"
+                "description": "No Content",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "Faltan datos"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "401": {
-                "description": "No eres administrador"
+                "description": "Unauthorized",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "No eres administrador"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -493,16 +880,68 @@ const swaggerOptions = {
             },
             "responses": {
               "200": {
-                "description": "Medio de pago editado con exito"
+                "description": "Ok",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "msg": {
+                          "type": "string",
+                          "example": "Medio de pago editado con exito"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "204": {
-                "description": "Faltan datos"
+                "description": "No content",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "Faltan datos"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "400": {
-                "description": "No se encontro el id"
+                "description": "Bad request",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "msg": {
+                          "type": "string",
+                          "example": "Pedido editado con exito"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "401": {
-                "description": "No eres administrador"
+                "description": "Unauthorized",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "No eres administrador"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -528,10 +967,36 @@ const swaggerOptions = {
             ],
             "responses": {
               "200": {
-                "description": "Medio de pago eliminado"
+                "description": "Ok",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "msg": {
+                          "type": "string",
+                          "example": "Medio de pago eliminado correctamente"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "401": {
-                "description": "No eres administrador"
+                "description": "Unauthorized",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                          "example": "No eres administrador"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -553,7 +1018,7 @@ const swaggerOptions = {
           "Usuario": {
             "type": "object",
             "required": [
-              "user",
+              "usuario",
               "nombre",
               "apellido",
               "correo",
@@ -562,26 +1027,33 @@ const swaggerOptions = {
               "contraseña"
             ],
             "properties": {
-              "user": {
-                "type": "string"
+              "usuario": {
+                "type": "string",
+                "example": "J"
               },
               "nombre": {
-                "type": "string"
+                "type": "string",
+                "example": "Jaao"
               },
               "apellido": {
-                "type": "string"
+                "type": "string",
+                "example": "A"
               },
               "correo": {
-                "type": "string"
+                "type": "string",
+                "example": "j@gmail.com"
               },
               "telefono": {
-                "type": "number"
+                "type": "number",
+                "example": 311111
               },
               "direccion": {
-                "type": "string"
+                "type": "string",
+                "example": "Hospital"
               },
               "contraseña": {
-                "type": "string"
+                "type": "string",
+                "example": "111111"
               }
             }
           },
@@ -593,10 +1065,12 @@ const swaggerOptions = {
             ],
             "properties": {
               "nombre": {
-                "type": "string"
+                "type": "string",
+                "example": "Cerveza"
               },
               "precio": {
-                "type": "number"
+                "type": "number",
+                "example": 4000
               }
             }
           },
@@ -615,23 +1089,32 @@ const swaggerOptions = {
           "Pedido": {
             "type": "object",
             "required": [
+              "identificador",
               "nombres",
               "cantidades",
               "medio de pago",
               "estado"
             ],
             "properties": {
+              "identificador": {
+                "type": "number",
+                "example": 1
+              },
               "nombres": {
                 "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/nombres"
-                }
+                "items": {},
+                "example": [
+                  "Hamburguesa",
+                  "Coca-cola"
+                ]
               },
               "cantidades": {
                 "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/cantidades"
-                }
+                "items": {},
+                "example": [
+                  3,
+                  2
+                ]
               },
               "medio de pago": {
                 "type": "string",
@@ -643,34 +1126,10 @@ const swaggerOptions = {
               }
             }
           },
-          "nombres": {
-            "type": "object",
-            "required": [
-              "nombre"
-            ],
-            "properties": {
-              "nombres": {
-                "type": "string",
-                "example": [
-                  "Hamburguesa",
-                  "Coca-cola"
-                ]
-              }
-            }
-          },
-          "cantidades": {
-            "type": "object",
-            "required": [
-              "cantidad"
-            ],
-            "properties": {
-              "numeros": {
-                "type": "number",
-                "example": [
-                  3,
-                  2
-                ]
-              }
+          "Pedidoxid": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Pedido"
             }
           },
           "Estado": {
