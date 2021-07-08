@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const {EsAdministrador} = require('../middlewares/Administrador.middleware');
-const {Usuario} = require('../middlewares/Usuario.middleware');
 const { mostrarUsuarios, registrarUsuarios } = require('../models/usuarios.model');
 const {Precio} = require('../models/pedidos.models');
 
