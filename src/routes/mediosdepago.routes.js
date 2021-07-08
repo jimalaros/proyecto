@@ -4,7 +4,7 @@ const {EsAdministrador} = require('../middlewares/Administrador.middleware');
 const { MostrarMediosdePago, RegistrarMediosdePago } = require('../models/mediosdepago.models');
 
 router.get('/', EsAdministrador, (req,res) => {
-    res.json(MostrarMediosdePago());
+    res.sendStatus(200).json(MostrarMediosdePago());
 });
 
 router.post('/', EsAdministrador, (req,res) => {
@@ -14,11 +14,14 @@ router.post('/', EsAdministrador, (req,res) => {
         id=MostrarMediosdePago.length+1;
         const Nuevo = {id, mediodepago};
         RegistrarMediosdePago(Nuevo);
+        res.sendStatus(201).json({msg: 'Medio de pago creado con exito'});
     }
-    
+    else {
+        res.sendStatus(204).json({msg: 'Faltan campos por llenar'});
+    }
 });
 
-router.put('/:id', EsAdministrador, (req, res) => {
+router.put('/EditarMedioDePago/:id', EsAdministrador, (req, res) => {
     const id = Number(req.params.id);
     const { mediodepago } = req.body;
     if (mediodepago) {
@@ -26,22 +29,22 @@ router.put('/:id', EsAdministrador, (req, res) => {
             if (payment) {
                 payment.mediodepago = mediodepago;
                 const Editado = {mediodepago};
-                res.json(MostrarMediosdePago(Editado));
+                res.sendStatus(200).json(MostrarMediosdePago(Editado));
             }
             else
             {
-                res.json('Identificador no encontrado en los medios de pago existentes')
+                res.sendStatus(400).json('Identificador no encontrado en los medios de pago existentes')
             }
         
     } else {
-        res.status(204).json({msg: 'Faltan campos por llenar'});
+        res.sendStatus(204).json({msg: 'Faltan campos por llenar'});
     }
 });
 
-router.delete('/:id', EsAdministrador, (req, res) => {
+router.delete('/EliminarMedioDePago/:id', EsAdministrador, (req, res) => {
     const id = Number(req.params.id)
     const Mediosdepago = MostrarMediosdePago().filter(u => u.id != id)
-    res.json('El medio de pago eliminado: ',Mediosdepago)
+    res.sendStatus(200).json('El medio de pago eliminado: ',Mediosdepago)
 });
 
 module.exports = router;
