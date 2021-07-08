@@ -5,7 +5,7 @@ const router = express.Router();
 const { mostrarUsuarios, registrarUsuarios } = require('../models/usuarios.model');
 
 router.get('/', (req, res) => {
-    res.sendStatus(200).json(mostrarUsuarios());
+    res.json(mostrarUsuarios());
 });
 
 router.post('/registro', (req, res) => {
@@ -17,7 +17,7 @@ router.post('/registro', (req, res) => {
             const Administrador = false
             const usuarioNuevo = {id,...req.body, Administrador};
             registrarUsuarios(usuarioNuevo);
-            res.sendStatus(201).json('Bienvenido', nombre);
+            res.sendStatus(201).json({msg: 'Bienvenido', nombre});
         }
         else res.sendStatus(400).json({err: 'El correo ya esta en uso'})
         
@@ -34,9 +34,9 @@ router.post('/Login', (req, res) => {
         {
             res.sendStatus(200).json({msg: 'Sesión iniciada'});    
         }
-        else res.sendStatus(204).json('Usuario no encontrado')
+        else res.sendStatus(204).json({msg: 'El usuario no se encuentra en el sistema'})
     }
-    else res.sendStatus(204).json('Faltan datos');
+    else res.sendStatus(204).json({msg: 'Faltan datos'});
 });
 
 module.exports = router;
