@@ -17,8 +17,6 @@ names=[];
 total=[];
 ORDENES=[];
 
-
-
 //HISTORIAL DE TODOS LOS PEDIDOS PARA ADMINISTRADORES
 router.get('/', EsAdministrador, (req, res) => {
     
@@ -28,41 +26,41 @@ router.get('/', EsAdministrador, (req, res) => {
         ORDENES.push(pedidosAlexander);
         ORDENES.push(pedidosJim);
         ORDENES.push(pedidos);
-        res.sendStatus(200).json(ORDENES);
+        res.json(ORDENES);
     }
     else
     {
-        res.sendStatus(204).json({msg: 'No hay pedidos para mostrar'});
+        res.sendStatus(204).json({err: 'No hay pedidos para mostrar'});
     }
 });
 
 //HISTORIAL DE PEDIDOS POR USUARIO
 router.get('/historial/:id', (req, res)=>{
     const id = Number(req.params.id);
-    const username = mostrarUsuarios().find(u => u.id === id)
+    const username = mostrarUsuarios().find(u => u.id === id);
     const nombre = username.nombre;
     const telefono = username.telefono;
     const direccion = username.direccion;
 
     if(username.id === 1){
         const respuesta = { pedidosJimmy, nombre, direccion, telefono }
-        res.sendStatus(200).json(respuesta);
+        res.json(respuesta);
     }
     if(username.id === 2){
         const respuesta = { pedidosAlexander, nombre, direccion, telefono }
-        res.sendStatus(200).json(respuesta);
+        res.json(respuesta);
     }
     if(username.id === 3){
         const respuesta = { pedidosJim, nombre, direccion, telefono }
-        res.sendStatus(200).json(respuesta);
+        res.json(respuesta);
     }
     if(Nombre_Usuario.id != 1 && Nombre_Usuario.id != 2 && Nombre_Usuario.id != 3)
     {
         const respuesta = { pedidos, nombre, direccion, telefono }
-        res.sendStatus(200).json(respuesta);   
+        res.json(respuesta);   
     }
     else{
-        res.sendStatus(204).json(`El usuario ${nombre} no ha realizado ningún pedido`);
+        res.sendStatus(204).json({msg: `El usuario ${nombre} no ha realizado ningún pedido`});
     }
 });
 
@@ -83,7 +81,7 @@ router.post('/CrearPedido/:id', (req,res) => {
             let identificador = pedidosJimmy.length+1
             const nuevoPedido = {identificador, nombres, cantidades, preciototal, mediodepago, estado}
             pedidosJimmy.push(nuevoPedido);
-            res.sendStatus(201).json(nuevoPedido);
+            res.sendStatus(201).json({msg: 'Pedido creado con exito'});
         }
         if(pedidosJimmy.length>0)
         {
@@ -91,14 +89,14 @@ router.post('/CrearPedido/:id', (req,res) => {
             cantidades.splice(0,2);
             const nuevoPedido = {identificador, nombres, cantidades, preciototal, mediodepago, estado}
             pedidosJimmy.push(nuevoPedido);
-            res.sendStatus(201).json(nuevoPedido);
+            res.sendStatus(201).json({msg: 'Pedido creado con exito'});
         }        
         if(Nombre_Usuario.id === 2)
         {
             let identificador = pedidosAlexander.length+1
             const nuevoPedido = {identificador, nombres, cantidades, preciototal, mediodepago, estado}
             pedidosAlexander.push(nuevoPedido);
-            res.sendStatus(201).json(nuevoPedido);
+            res.sendStatus(201).json({msg: 'Pedido creado con exito'});
         }
         if(pedidosAlexander.length>0)
         {
@@ -106,14 +104,14 @@ router.post('/CrearPedido/:id', (req,res) => {
             cantidades.splice(0,2);
             const nuevoPedido = {identificador, nombres, cantidades, preciototal, mediodepago, estado}
             pedidosAlexander.push(nuevoPedido);
-            res.sendStatus(201).json(nuevoPedido);
+            res.sendStatus(201).json({msg: 'Pedido creado con exito'});
         }
         if(Nombre_Usuario.id === 3)
         {
             let identificador = pedidosJim.length+1
             const nuevoPedido = {identificador, nombres, cantidades, preciototal, mediodepago, estado}
             pedidosJim.push(nuevoPedido);
-            res.sendStatus(201).json(nuevoPedido);
+            res.sendStatus(201).json({msg: 'Pedido creado con exito'});
         }
         if(pedidosJim.length>0)
         {
@@ -121,14 +119,14 @@ router.post('/CrearPedido/:id', (req,res) => {
             cantidades.splice(0,2);
             const nuevoPedido = {identificador3, nombres, cantidades, preciototal, mediodepago, estado}
             pedidosJim.push(nuevoPedido);
-            res.sendStatus(201).json(nuevoPedido);
+            res.sendStatus(201).json({msg: 'Pedido creado con exito'});
         }
         if(Nombre_Usuario.id != 1 && Nombre_Usuario.id != 2 && Nombre_Usuario.id != 3)
         {
             let identificador = pedidos.length+1
             const nuevoPedido = {identificador, nombres, cantidades, preciototal, mediodepago, estado} 
             pedidos.push(nuevoPedido);
-            res.sendStatus(201).json(nuevoPedido);
+            res.sendStatus(201).json({msg: 'Pedido creado con exito'});
         }
         if(pedidos.length>0)
         {
@@ -136,11 +134,11 @@ router.post('/CrearPedido/:id', (req,res) => {
             cantidades.splice(0,2);
             const nuevoPedido = {identificador, nombres, cantidades, preciototal, mediodepago, estado}
             pedidos.push(nuevoPedido);
-            res.sendStatus(201).json(nuevoPedido);
+            res.sendStatus(201).json({msg: 'Pedido creado con exito'});
         }
     }
     else{
-        res.sendStatus(204).json({error: 'Faltan parametros'});
+        res.sendStatus(204).json({err: 'Faltan datos'});
     }
 });
 
@@ -170,15 +168,15 @@ router.put('/EditarPedido/:id', (req, res) => {
                         pedido.nombres.splice(0,2);
                         pedido.cantidades.splice(0,2);
                         pedidosJimmy.push(NewOrder);
-                        res.sendStatus(201).json('La edición fue un exito');
+                        res.sendStatus(201).json({msg: 'Pedido editado con exito'});
                     }
                     else
                     {
-                        res.sendStatus(400).json('Su pedido no puede ser editado');
+                        res.sendStatus(400).json({err: 'El pedido no puede ser editado porque el estado es cerrado'});
                     }
                 }
                 else{
-                    res.sendStatus(204).json({msg: "Pedido no encontrado"});
+                    res.sendStatus(204).json({err: "Pedido no encontrado"});
                 }
             });
         }
@@ -199,16 +197,16 @@ router.put('/EditarPedido/:id', (req, res) => {
                         pedido.nombres.splice(0,2);
                         pedido.cantidades.splice(0,2);
                         pedidosAlexander.push(NewOrder);
-                        res.sendStatus(201).json('La edición fue un exito');
+                        res.sendStatus(201).json({msg: 'Pedido editado con exito'});
                         
                     }
                     else
                     {
-                        res.sendStatus(400).json('Su pedido no puede ser editado');
+                        res.sendStatus(400).json({err: 'El pedido no puede ser editado porque el estado es cerrado'});
                     }
                 }
                 else{
-                    res.sendStatus(204).json({msg: "Pedido no encontrado"});
+                    res.sendStatus(204).json({err: 'Pedido no encontrado'});
                 }
             });
         }
@@ -229,15 +227,15 @@ router.put('/EditarPedido/:id', (req, res) => {
                         pedido.nombres.splice(0,2);
                         pedido.cantidades.splice(0,2);
                         pedidosJim.push(NewOrder);
-                        res.sendStatus(201).json('La edición fue un exito');
+                        res.sendStatus(201).json({msg: 'Pedido editado con exito'});
                     }
                     else
                     {
-                        res.sendStatus(400).json('Su pedido no puede ser editado');
+                        res.sendStatus(400).json({err: 'El pedido no puede ser editado porque el estado es cerrado'});
                     }
                 }    
                 else{
-                    res.sendStatus(204).json({msg: "Pedido no encontrado"});
+                    res.sendStatus(204).json({err: 'Pedido no encontrado'});
                 }
             });
         }
@@ -257,21 +255,21 @@ router.put('/EditarPedido/:id', (req, res) => {
                         pedido.nombres.splice(0,2);
                         pedido.cantidades.splice(0,2);
                         pedidos.push(NewOrder);
-                        res.sendStatus(201).json('La edición fue un exito');
+                        res.sendStatus(201).json({msg: 'Pedido editado con exito'});
                     }
                     else
                     {
-                        res.sendStatus(400).json('Su pedido no puede ser editado');
+                        res.sendStatus(400).json({err: 'El pedido no puede ser editado porque el estado es cerrado'});
                     }
                 }
                 else{
-                    res.sendStatus(204).json({msg: "Pedido no encontrado"});
+                    res.sendStatus(204).json({err: 'Pedido no encontrado'});
                 }
             });
         }
     }
     else {
-        res.status(204).json({error: 'Faltan datos'});
+        res.status(204).json({err: 'Faltan datos'});
     } 
 });
 
@@ -286,8 +284,7 @@ router.put('/estadopedido/:id', EsAdministrador, (req,res) => {
             if (pedido.identificador === indice)
             {
                 pedido.estado = estado;
-                const new_Estate = { pedidosJimmy: (estado)};
-                res.sendStatus(200).json(new_Estate);
+                res.sendStatus(200).json({msg: 'Estado editado con exito'});
             }
         });
     }
@@ -297,8 +294,7 @@ router.put('/estadopedido/:id', EsAdministrador, (req,res) => {
             if (pedido.identificador === indice)
             {
                 pedido.estado = estado;
-                const new_Estate = { pedidosJimmy: (estado)};
-                res.sendStatus(200).json(new_Estate);
+                res.sendStatus(200).json({msg: 'Estado editado con exito'});
             }
         });
     }
@@ -308,8 +304,7 @@ router.put('/estadopedido/:id', EsAdministrador, (req,res) => {
             if (pedido.identificador === indice)
             {
                 pedido.estado = estado;
-                const new_Estate = { pedidosJimmy: (estado)};
-                res.sendStatus(200).json(new_Estate);
+                res.sendStatus(200).json({msg: 'Estado editado con exito'});
             }
         });
     }
@@ -319,8 +314,7 @@ router.put('/estadopedido/:id', EsAdministrador, (req,res) => {
             if (pedido.identificador === indice)
             {
                 pedido.estado = estado;
-                const new_Estate = { pedidosJimmy: (estado)};
-                res.sendStatus(200).json(new_Estate);
+                res.sendStatus(200).json({msg: 'Estado editado con exito'});
             }
         });
     }
