@@ -17,26 +17,26 @@ router.post('/registro', (req, res) => {
             const Administrador = false
             const usuarioNuevo = {id,...req.body, Administrador};
             registrarUsuarios(usuarioNuevo);
-            res.sendStatus(201).json({msg: 'Bienvenido', nombre});
+            res.status(201).json({msg: 'Bienvenido', nombre});
         }
-        else res.sendStatus(400).json({err: 'El correo ya esta en uso'})
+        else res.status(400).json({err: 'El correo ya esta en uso'})
         
     } else {
-        res.sendStatus(204).json({msg: 'Faltan datos'});
+        res.status(204).json({msg: 'Faltan datos'});
     }
 });
 
 router.post('/Login', (req, res) => {
-    const { correo, contraseña } = req.body;
-    if (correo && contraseña) {
-        const username = mostrarUsuarios().find(u => u.correo === correo && u.contraseña === contraseña)
+    const { email, password } = req.body;
+    if (email && password) {
+        const username = mostrarUsuarios().find(u => u.correo === email && u.contraseña === password)
         if (username) 
         {
-            res.sendStatus(200).json({msg: 'Sesión iniciada'});    
+            res.status(200).json({msg: 'Sesión iniciada'});    
         }
-        else res.sendStatus(204).json({msg: 'El usuario no se encuentra en el sistema'})
+        else res.status(400).json({err: 'El usuario no se encuentra en el sistema'})
     }
-    else res.sendStatus(204).json({msg: 'Faltan datos'});
+    else res.status(204).json({err: 'Faltan datos'});
 });
 
 module.exports = router;
