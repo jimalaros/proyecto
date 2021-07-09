@@ -3,6 +3,7 @@ const router = express.Router();
 const {EsAdministrador} = require('../middlewares/Administrador.middleware');
 const { mostrarUsuarios, registrarUsuarios } = require('../models/usuarios.model');
 const {Precio} = require('../models/pedidos.models');
+const { MostrarMediosdePago, RegistrarMediosdePago } = require('../models/mediosdepago.models');
 
 pedidosJimmy=[];
 pedidosAlexander=[];
@@ -29,7 +30,7 @@ router.get('/', EsAdministrador, (req, res) => {
     }
     else
     {
-        res.sendStatus(204).json({err: 'No hay pedidos para mostrar'});
+        res.status(204).json({err: 'No hay pedidos para mostrar'});
     }
 });
 
@@ -59,7 +60,7 @@ router.get('/historial/:id', (req, res)=>{
         res.json(respuesta);   
     }
     else{
-        res.sendStatus(204).json({msg: `El usuario ${nombre} no ha realizado ningún pedido`});
+        res.status(204).json({msg: `El usuario ${nombre} no ha realizado ningún pedido`});
     }
 });
 
@@ -79,74 +80,130 @@ router.post('/CrearPedido/:id', (req,res) => {
         {
             let identificador = pedidosJimmy.length+1
             const nuevoPedido = {identificador, nombres, cantidades, preciototal, mediodepago, estado}
-            pedidosJimmy.push(nuevoPedido);
-            res.sendStatus(201).json({msg: 'Pedido creado con exito'});
+            if(MostrarMediosdePago().find(m => m.mediodepago === mediodepago))
+            {
+                pedidosJimmy.push(nuevoPedido);
+                res.status(201).json({msg: 'Pedido creado con exito'});
+            }
+            else
+            {
+                res.status(400).json({err: 'El medio de pago no existe'})
+            }
         }
         if(pedidosJimmy.length>0)
         {
             nombres.splice(0,2);
             cantidades.splice(0,2);
             const nuevoPedido = {identificador, nombres, cantidades, preciototal, mediodepago, estado}
-            pedidosJimmy.push(nuevoPedido);
-            res.sendStatus(201).json({msg: 'Pedido creado con exito'});
+            if(MostrarMediosdePago().find(m => m.mediodepago === mediodepago))
+            {
+                pedidosJimmy.push(nuevoPedido);
+                res.status(201).json({msg: 'Pedido creado con exito'});
+            }
+            else
+            {
+                res.status(400).json({err: 'El medio de pago no existe'})
+            }
         }        
         if(Nombre_Usuario.id === 2)
         {
             let identificador = pedidosAlexander.length+1
             const nuevoPedido = {identificador, nombres, cantidades, preciototal, mediodepago, estado}
-            pedidosAlexander.push(nuevoPedido);
-            res.sendStatus(201).json({msg: 'Pedido creado con exito'});
+            if(MostrarMediosdePago().find(m => m.mediodepago === mediodepago))
+            {
+                pedidosAlexander.push(nuevoPedido);
+                res.status(201).json({msg: 'Pedido creado con exito'});
+            }
+            else
+            {
+                res.status(400).json({err: 'El medio de pago no existe'})
+            }
         }
         if(pedidosAlexander.length>0)
         {
             nombres.splice(0,2);
             cantidades.splice(0,2);
             const nuevoPedido = {identificador, nombres, cantidades, preciototal, mediodepago, estado}
-            pedidosAlexander.push(nuevoPedido);
-            res.sendStatus(201).json({msg: 'Pedido creado con exito'});
+            if(MostrarMediosdePago().find(m => m.mediodepago === mediodepago))
+            {
+                pedidosAlexander.push(nuevoPedido);
+                res.status(201).json({msg: 'Pedido creado con exito'});
+            }
+            else
+            {
+                res.status(400).json({err: 'El medio de pago no existe'})
+            }
         }
         if(Nombre_Usuario.id === 3)
         {
             let identificador = pedidosJim.length+1
             const nuevoPedido = {identificador, nombres, cantidades, preciototal, mediodepago, estado}
-            pedidosJim.push(nuevoPedido);
-            res.sendStatus(201).json({msg: 'Pedido creado con exito'});
+            if(MostrarMediosdePago().find(m => m.mediodepago === mediodepago))
+            {
+                pedidosJim.push(nuevoPedido);
+                res.status(201).json({msg: 'Pedido creado con exito'});
+            }
+            else
+            {
+                res.status(400).json({err: 'El medio de pago no existe'})
+            }
         }
         if(pedidosJim.length>0)
         {
             nombres.splice(0,2);
             cantidades.splice(0,2);
             const nuevoPedido = {identificador3, nombres, cantidades, preciototal, mediodepago, estado}
-            pedidosJim.push(nuevoPedido);
-            res.sendStatus(201).json({msg: 'Pedido creado con exito'});
+            if(MostrarMediosdePago().find(m => m.mediodepago === mediodepago))
+            {
+                pedidosJim.push(nuevoPedido);
+                res.status(201).json({msg: 'Pedido creado con exito'});
+            }
+            else
+            {
+                res.status(400).json({err: 'El medio de pago no existe'})
+            }
         }
         if(Nombre_Usuario.id != 1 && Nombre_Usuario.id != 2 && Nombre_Usuario.id != 3)
         {
             let identificador = pedidos.length+1
             const nuevoPedido = {identificador, nombres, cantidades, preciototal, mediodepago, estado} 
-            pedidos.push(nuevoPedido);
-            res.sendStatus(201).json({msg: 'Pedido creado con exito'});
+            if(MostrarMediosdePago().find(m => m.mediodepago === mediodepago))
+            {
+                pedidos.push(nuevoPedido);
+                res.status(201).json({msg: 'Pedido creado con exito'});
+            }
+            else
+            {
+                res.status(400).json({err: 'El medio de pago no existe'})
+            }
         }
         if(pedidos.length>0)
         {
             nombres.splice(0,2);
             cantidades.splice(0,2);
             const nuevoPedido = {identificador, nombres, cantidades, preciototal, mediodepago, estado}
-            pedidos.push(nuevoPedido);
-            res.sendStatus(201).json({msg: 'Pedido creado con exito'});
+            if(MostrarMediosdePago().find(m => m.mediodepago === mediodepago))
+            {
+                pedidos.push(nuevoPedido);
+                res.status(201).json({msg: 'Pedido creado con exito'});
+            }
+            else
+            {
+                res.status(400).json({err: 'El medio de pago no existe'})
+            }
         }
     }
     else{
-        res.sendStatus(204).json({err: 'Faltan datos'});
+        res.status(204).json({err: 'Faltan datos'});
     }
 });
 
 router.put('/EditarPedido/:id', (req, res) => {
-    const { n, items, amounts, formadepago, state } = req.body;
-    if(n && items && amounts && formadepago && state)  
+    const { nombres, cantidades, mediodepago, estado } = req.body;
+    if(n && nombres && cantidades && mediodepago && estado)  
     {   
-        n=items.length;
-        let preciopedidoeditado = Precio(n, items, amounts);
+        n=nombres.length;
+        let preciototal = Precio(n, nombres, cantidades);
         
         const indice = Number(req.params.id);
         const Nombre_Usuario = mostrarUsuarios().find(u => u.id === indice);
@@ -157,25 +214,25 @@ router.put('/EditarPedido/:id', (req, res) => {
                 {
                     if(pedido.estado === "Abierto")
                     {
-                        pedido.nombres = items;
-                        pedido.cantidades = amounts;
-                        pedido.preciototal = preciopedidoeditado;
-                        pedido.mediodepago = formadepago;
-                        pedido.estado = state;
+                        pedido.nombres = nombres;
+                        pedido.cantidades = cantidades;
+                        pedido.preciototal = preciototal;
+                        pedido.mediodepago = mediodepago;
+                        pedido.estado = estado;
                         let identificador = "editado"
-                        const NewOrder = {identificador, items, amounts, preciopedidoeditado, formadepago, state}
+                        const NewOrder = {identificador, nombres, cantidades, preciototal, mediodepago, estado}
                         pedido.nombres.splice(0,2);
                         pedido.cantidades.splice(0,2);
                         pedidosJimmy.push(NewOrder);
-                        res.sendStatus(201).json({msg: 'Pedido editado con exito'});
+                        res.status(201).json({msg: 'Pedido editado con exito'});
                     }
                     else
                     {
-                        res.sendStatus(400).json({err: 'El pedido no puede ser editado porque el estado es cerrado'});
+                        res.status(400).json({err: 'El pedido no puede ser editado porque el estado es cerrado'});
                     }
                 }
                 else{
-                    res.sendStatus(204).json({err: "Pedido no encontrado"});
+                    res.status(204).json({err: "Pedido no encontrado"});
                 }
             });
         }
@@ -186,26 +243,26 @@ router.put('/EditarPedido/:id', (req, res) => {
                 {
                     if(pedido.estado === "Abierto")
                     {
-                        pedido.nombres = items;
-                        pedido.cantidades = amounts;
-                        pedido.preciototal = preciopedidoeditado;
-                        pedido.mediodepago = formadepago;
-                        pedido.estado = state;
+                        pedido.nombres = nombres;
+                        pedido.cantidades = cantidades;
+                        pedido.preciototal = preciototal;
+                        pedido.mediodepago = mediodepago;
+                        pedido.estado = estado;
                         let identificador = "editado"
-                        const NewOrder = {identificador, items, amounts, preciopedidoeditado, formadepago, state}
+                        const NewOrder = {identificador, nombres, cantidades, preciototal, mediodepago, estado}
                         pedido.nombres.splice(0,2);
                         pedido.cantidades.splice(0,2);
                         pedidosAlexander.push(NewOrder);
-                        res.sendStatus(201).json({msg: 'Pedido editado con exito'});
+                        res.status(201).json({msg: 'Pedido editado con exito'});
                         
                     }
                     else
                     {
-                        res.sendStatus(400).json({err: 'El pedido no puede ser editado porque el estado es cerrado'});
+                        res.status(400).json({err: 'El pedido no puede ser editado porque el estado es cerrado'});
                     }
                 }
                 else{
-                    res.sendStatus(204).json({err: 'Pedido no encontrado'});
+                    res.status(204).json({err: 'Pedido no encontrado'});
                 }
             });
         }
@@ -216,25 +273,25 @@ router.put('/EditarPedido/:id', (req, res) => {
                 {
                     if(pedido.estado === "Abierto")
                     {
-                        pedido.nombres = items;
-                        pedido.cantidades = amounts;
-                        pedido.preciototal = preciopedidoeditado;
-                        pedido.mediodepago = formadepago;
-                        pedido.estado = state;
+                        pedido.nombres = nombres;
+                        pedido.cantidades = cantidades;
+                        pedido.preciototal = preciototal;
+                        pedido.mediodepago = mediodepago;
+                        pedido.estado = estado;
                         let identificador = "editado"
-                        const NewOrder = {identificador, items, amounts, preciopedidoeditado, formadepago, state}
+                        const NewOrder = {identificador, nombres, cantidades, preciototal, mediodepago, estado}
                         pedido.nombres.splice(0,2);
                         pedido.cantidades.splice(0,2);
                         pedidosJim.push(NewOrder);
-                        res.sendStatus(201).json({msg: 'Pedido editado con exito'});
+                        res.status(201).json({msg: 'Pedido editado con exito'});
                     }
                     else
                     {
-                        res.sendStatus(400).json({err: 'El pedido no puede ser editado porque el estado es cerrado'});
+                        res.status(400).json({err: 'El pedido no puede ser editado porque el estado es cerrado'});
                     }
                 }    
                 else{
-                    res.sendStatus(204).json({err: 'Pedido no encontrado'});
+                    res.status(204).json({err: 'Pedido no encontrado'});
                 }
             });
         }
@@ -244,25 +301,25 @@ router.put('/EditarPedido/:id', (req, res) => {
                 if (pedido.identificador === indice)
                 {
                     if (pedido.estado === "Abierto") {
-                        pedido.nombres = items;
-                        pedido.cantidades = amounts;
-                        pedido.preciototal = preciopedidoeditado;
-                        pedido.mediodepago = formadepago;
-                        pedido.estado = state;
+                        pedido.nombres = nombres;
+                        pedido.cantidades = cantidades;
+                        pedido.preciototal = preciototal;
+                        pedido.mediodepago = mediodepago;
+                        pedido.estado = estado;
                         let identificador = "editado"
-                        const NewOrder = {identificador, items, amounts, preciopedidoeditado, formadepago, state}
+                        const NewOrder = {identificador, nombres, cantidades, preciototal, mediodepago, estado}
                         pedido.nombres.splice(0,2);
                         pedido.cantidades.splice(0,2);
                         pedidos.push(NewOrder);
-                        res.sendStatus(201).json({msg: 'Pedido editado con exito'});
+                        res.status(201).json({msg: 'Pedido editado con exito'});
                     }
                     else
                     {
-                        res.sendStatus(400).json({err: 'El pedido no puede ser editado porque el estado es cerrado'});
+                        res.status(400).json({err: 'El pedido no puede ser editado porque el estado es cerrado'});
                     }
                 }
                 else{
-                    res.sendStatus(204).json({err: 'Pedido no encontrado'});
+                    res.status(204).json({err: 'Pedido no encontrado'});
                 }
             });
         }
@@ -283,7 +340,7 @@ router.put('/estadopedido/:id', EsAdministrador, (req,res) => {
             if (pedido.identificador === indice)
             {
                 pedido.estado = estado;
-                res.sendStatus(200).json({msg: 'Estado editado con exito'});
+                res.status(200).json({msg: 'Estado editado con exito'});
             }
         });
     }
@@ -293,7 +350,7 @@ router.put('/estadopedido/:id', EsAdministrador, (req,res) => {
             if (pedido.identificador === indice)
             {
                 pedido.estado = estado;
-                res.sendStatus(200).json({msg: 'Estado editado con exito'});
+                res.status(200).json({msg: 'Estado editado con exito'});
             }
         });
     }
@@ -303,7 +360,7 @@ router.put('/estadopedido/:id', EsAdministrador, (req,res) => {
             if (pedido.identificador === indice)
             {
                 pedido.estado = estado;
-                res.sendStatus(200).json({msg: 'Estado editado con exito'});
+                res.status(200).json({msg: 'Estado editado con exito'});
             }
         });
     }
@@ -313,7 +370,7 @@ router.put('/estadopedido/:id', EsAdministrador, (req,res) => {
             if (pedido.identificador === indice)
             {
                 pedido.estado = estado;
-                res.sendStatus(200).json({msg: 'Estado editado con exito'});
+                res.status(200).json({msg: 'Estado editado con exito'});
             }
         });
     }
