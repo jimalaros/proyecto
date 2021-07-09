@@ -10,52 +10,52 @@ router.get('/', (req, res) => {
 });
 
 router.post('/nuevos', EsAdministrador, (req, res) => {
-    const {nombree, precio} = req.body;
-    if (nombree && precio && precio>0)
+    const {nombre, precio} = req.body;
+    if (nombre && precio && precio>0)
     {   
-        const name = mostrarProductos().find(p => p.articulo === nombree);
-        if(name)
+        const name = mostrarProductos().find(p => p.nombre === nombre);
+        if(!name)
         {
-            res.sendStatus(400).json({err: 'El producto ya se encuentra registrado'});
+            registrarProductos(nombre, precio);
+            res.status(201).json({msg:'Producto creado con exito'});
         }
         else
         {
-            const Nuevo = {name, precio}
-            registrarProductos(Nuevo)
-            res.sendStatus(201).json({msg:'Producto creado con exito'});
+            res.status(400).json({err: 'El producto ya se encuentra registrado'});
         }
         
     }
-    else res.sendStatus(204).json({err: 'Faltan datos'});
+    else res.status(204).json({err: 'Faltan datos'});
 });
 
-router.put('/:id', EsAdministrador, (req, res) => {
-    const id = Number(req.params.id);
-    const { nombre, precio, } = req.body;
+router.put('/EditarProducto/:id', EsAdministrador, (req, res) => {
+    
+    const {nombre, precio} = req.body;
     if (nombre && precio) 
     {
-        const producto = mostrarProductos().find(p => p.id === id);
-        if (producto) 
-        {
-            producto.nombre = nombre;
-            producto.precio = precio;
-            producto.descripcion = descripcion;
-            res.sendStatus(200).json({msg: 'producto editado con exito'});
-        }
-        else {
-            res.status(204).json({err: 'No se ha encontrado el producto'});
-        } 
-    } else {
+        const id = Number(req.params.id);
+        mostrarProductos().forEach(producto => {
+            if(producto.id === id)
+            {
+                producto.nombre=nombre;
+                producto.precio=precio;
+                res.status(200).json({msg: 'Producto editado con exito'});
+            }
+        });            
+    }    
+    else 
+    {
         res.status(204).json({err: 'Faltan campos por llenar'});
     }
 });
 
- router.delete('/Eliminar/:id', EsAdministrador, (req, res) => {
-    const id = Number(req.params.id);
-    const Productos = mostrarProductos().filter(u => u.id != id);
-    if(Productos)
-    {
-        res.sendStatus(200).json({msg: 'Producto eliminado correctamente'});
+router.delete('/EliminarProducto/:id', EsAdministrador, (req, res) => {
+    if (!mostrarProductos().some(u => u.id == req.params.id)){
+        return res.status(400).json("El producto no esta registrado.")}
+    else {
+        const  product = mostrarProductos().find( u => u.id == req.params.id);
+        mostrarProductos().splice(mostrarProductos().lastIndexOf(product),1);
+        res.status(200).json({msg:'Producto eliminado'});
     }
 });
 
