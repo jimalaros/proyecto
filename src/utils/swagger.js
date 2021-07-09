@@ -126,26 +126,15 @@ const swaggerOptions = {
             ],
             "summary": "Para que los usuarios inicien sesión",
             "description": "Iniciar sesión",
-            "parameters": [
-              {
-                "in": "query",
-                "name": "correo",
-                "required": true,
-                "schema": {
-                  "type": "string",
-                  "example": "h@gmail.com"
-                }
-              },
-              {
-                "in": "query",
-                "name": "contraseña",
-                "required": true,
-                "schema": {
-                  "type": "string",
-                  "example": "2222"
+            "requestBody": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UsuarioLogin"
+                  }
                 }
               }
-            ],
+            },
             "responses": {
               "200": {
                 "description": "Ok",
@@ -155,6 +144,21 @@ const swaggerOptions = {
                       "type": "object",
                       "properties": {
                         "msg": {
+                          "type": "string",
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
                           "type": "string",
                         }
                       }
@@ -180,7 +184,7 @@ const swaggerOptions = {
             }
           }
         },
-        "/Productos": {
+        "/productos": {
           "get": {
             "tags": [
               "Productos"
@@ -201,7 +205,7 @@ const swaggerOptions = {
             }
           }
         },
-        "/Productos/nuevos": {
+        "/productos/nuevos": {
           "post": {
             "tags": [
               "Productos"
@@ -227,23 +231,6 @@ const swaggerOptions = {
                       "properties": {
                         "msg": {
                           "type": "string",
-                          "example": "Producto creado con exito"
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "204": {
-                "description": "No Content",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "type": "object",
-                      "properties": {
-                        "err": {
-                          "type": "string",
-                          "example": "Faltan datos"
                         }
                       }
                     }
@@ -259,7 +246,21 @@ const swaggerOptions = {
                       "properties": {
                         "err": {
                           "type": "string",
-                          "example": "El producto ya fue creado"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "204": {
+                "description": "No Content",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
                         }
                       }
                     }
@@ -272,7 +273,7 @@ const swaggerOptions = {
             }
           }
         },
-        "/Productos:/{id}": {
+        "/productos/EditarProducto/{id}": {
           "put": {
             "tags": [
               "Productos"
@@ -309,7 +310,6 @@ const swaggerOptions = {
                       "properties": {
                         "msg": {
                           "type": "string",
-                          "example": "La edición fue un exito"
                         }
                       }
                     }
@@ -325,7 +325,6 @@ const swaggerOptions = {
                       "properties": {
                         "err": {
                           "type": "string",
-                          "example": "Faltan datos"
                         }
                       }
                     }
@@ -338,7 +337,7 @@ const swaggerOptions = {
             }
           }
         },
-        "/Productos/Eliminar/{id}": {
+        "/productos/EliminarProducto/{id}": {
           "delete": {
             "tags": [
               "Productos"
@@ -358,6 +357,21 @@ const swaggerOptions = {
               }
             ],
             "responses": {
+              "400": {
+                "description": "Bad Request",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                        }
+                      }
+                    }
+                  }
+                }
+              },
               "200": {
                 "description": "Ok",
                 "content": {
@@ -367,23 +381,6 @@ const swaggerOptions = {
                       "properties": {
                         "msg": {
                           "type": "string",
-                          "example": "Producto eliminado correctamente"
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "204": {
-                "description": "No Content",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "type": "object",
-                      "properties": {
-                        "err": {
-                          "type": "string",
-                          "example": "Faltan datos"
                         }
                       }
                     }
@@ -396,7 +393,7 @@ const swaggerOptions = {
             }
           }
         },
-        "/Pedidos": {
+        "/pedidos": {
           "get": {
             "tags": [
               "Pedidos"
@@ -423,7 +420,6 @@ const swaggerOptions = {
                       "properties": {
                         "err": {
                           "type": "string",
-                          "example": "Faltan datos"
                         }
                       }
                     }
@@ -436,7 +432,7 @@ const swaggerOptions = {
             }
           }
         },
-        "/Pedidos/historial/{id}": {
+        "/pedidos/historial/{id}": {
           "get": {
             "tags": [
               "Pedidos"
@@ -447,7 +443,7 @@ const swaggerOptions = {
               {
                 "in": "path",
                 "name": "id",
-                "description": "Identificador del producto",
+                "description": "Identificador del usuario",
                 "required": true,
                 "schema": {
                   "type": "number",
@@ -475,7 +471,6 @@ const swaggerOptions = {
                       "properties": {
                         "err": {
                           "type": "string",
-                          "example": "Faltan datos"
                         }
                       }
                     }
@@ -485,7 +480,7 @@ const swaggerOptions = {
             }
           }
         },
-        "/Pedidos/CrearPedido/{id}": {
+        "/pedidos/CrearPedido/{id}": {
           "post": {
             "tags": [
               "Pedidos"
@@ -523,15 +518,14 @@ const swaggerOptions = {
                       "properties": {
                         "msg": {
                           "type": "string",
-                          "example": "Pedido creado con exito"
                         }
                       }
                     }
                   }
                 }
               },
-              "204": {
-                "description": "No Content",
+              "400": {
+                "description": "Bad Request",
                 "content": {
                   "application/json": {
                     "schema": {
@@ -539,7 +533,6 @@ const swaggerOptions = {
                       "properties": {
                         "err": {
                           "type": "string",
-                          "example": "Faltan datos"
                         }
                       }
                     }
@@ -549,7 +542,7 @@ const swaggerOptions = {
             }
           }
         },
-        "/Pedidos/EditarPedido/{id}": {
+        "/pedidos/EditarPedido/{id}": {
           "put": {
             "tags": [
               "Pedidos"
@@ -586,7 +579,6 @@ const swaggerOptions = {
                       "properties": {
                         "msg": {
                           "type": "string",
-                          "example": "Pedido editado con exito"
                         }
                       }
                     }
@@ -602,7 +594,6 @@ const swaggerOptions = {
                       "properties": {
                         "err": {
                           "type": "string",
-                          "example": "Faltan datos"
                         }
                       }
                     }
@@ -618,7 +609,6 @@ const swaggerOptions = {
                       "properties": {
                         "err": {
                           "type": "string",
-                          "example": "El estado de su pedido es cerrado, no puede ser editado"
                         }
                       }
                     }
@@ -628,7 +618,7 @@ const swaggerOptions = {
             }
           }
         },
-        "/Pedidos/estadoPedido/{id}": {
+        "/pedidos/estadoPedido/{id}": {
           "put": {
             "tags": [
               "Pedidos"
@@ -665,7 +655,6 @@ const swaggerOptions = {
                       "properties": {
                         "msg": {
                           "type": "string",
-                          "example": "Estado editado con exito"
                         }
                       }
                     }
@@ -837,13 +826,13 @@ const swaggerOptions = {
             "tags": [
               "MediosDePago"
             ],
-            "summary": "Para que los administradores eliminen productos del sistema",
+            "summary": "Para que los administradores eliminen medios de pago del sistema",
             "description": "Para eliminar alguno de los medios de pago existentes",
             "parameters": [
               {
                 "in": "path",
                 "name": "id",
-                "description": "Identificador del producto",
+                "description": "Identificador del medio de pago a eliminar",
                 "required": true,
                 "schema": {
                   "type": "number",
@@ -852,6 +841,21 @@ const swaggerOptions = {
               }
             ],
             "responses": {
+              "400": {
+                "description": "Bad Request",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "err": {
+                          "type": "string",
+                        }
+                      }
+                    }
+                  }
+                }
+              },
               "200": {
                 "description": "Ok",
                 "content": {
@@ -861,21 +865,7 @@ const swaggerOptions = {
                       "properties": {
                         "msg": {
                           "type": "string",
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "204": {
-                "description": "No content",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "type": "object",
-                      "properties": {
-                        "err": {
-                          "type": "string",
+                          "example": "Producto eliminado correctamente"
                         }
                       }
                     }
@@ -944,6 +934,23 @@ const swaggerOptions = {
               }
             }
           },
+          "UsuarioLogin": {
+            "type": "object",
+            "required": [
+              "correo",
+              "contraseña"
+            ],
+            "properties": {
+              "email": {
+                "type": "string",
+                "example": "j@gmail.com"
+              },
+              "password": {
+                "type": "string",
+                "example": "111111"
+              }
+            }
+          },
           "Producto": {
             "type": "object",
             "required": [
@@ -969,41 +976,30 @@ const swaggerOptions = {
             "properties": {
               "mediodepago": {
                 "type": "string",
-                "example": "Nequi"
+                "example": "Daviplata"
               }
             }
           },
           "Pedido": {
             "type": "object",
             "required": [
-              "identificador",
               "nombres",
               "cantidades",
-              "medio de pago",
+              "mediodepago",
               "estado"
             ],
             "properties": {
-              "identificador": {
-                "type": "number",
-                "example": 1
-              },
               "nombres": {
                 "type": "array",
                 "items": {},
-                "example": [
-                  "Hamburguesa",
-                  "Coca-cola"
-                ]
+                "example": ["Hamburguesa","Coca-cola"],
               },
               "cantidades": {
                 "type": "array",
                 "items": {},
-                "example": [
-                  3,
-                  2
-                ]
+                "example": [3,2],
               },
-              "medio de pago": {
+              "mediodepago": {
                 "type": "string",
                 "example": "Efectivo"
               },
@@ -1025,7 +1021,7 @@ const swaggerOptions = {
               "Estado",
             ],
             "properties": {
-              "nombre": {
+              "estado": {
                 "type": "string",
                 "example": "Enviado"
               }
