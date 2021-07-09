@@ -1,17 +1,17 @@
 const { mostrarProductos, registrarProductos } = require('./productos.models');
 
-function Precio (n, nombres, Cantidades)
+function Precio (n, nombres, cantidades)
 {   
     precios=[];
     for (let index = 0; index < n; index++) {
-        const precio = mostrarProductos().find(u => u.articulo === nombres[index]);
+        const precio = mostrarProductos().find(u => u.nombre === nombres[index]);
         precios.push(precio);
     }
 
     totales=[]
     items=[]
     for (let index = 0; index < n; index++) {
-        const b = Cantidades[index];
+        const b = cantidades[index];
         totales.push(b);
     }
     
@@ -24,8 +24,6 @@ function Precio (n, nombres, Cantidades)
     let preciototal=0;
     for (let d = 0; d < n; d++) {
         let Q = totales[d]*prices[d].precio;
-        console.log(totales[d]);
-        console.log(prices[d].precio);
         preciototal=preciototal+Q;    
     }
 
