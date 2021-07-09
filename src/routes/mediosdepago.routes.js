@@ -8,28 +8,33 @@ router.get('/', EsAdministrador, (req,res) => {
 });
 
 router.post('/', EsAdministrador, (req,res) => {
-    const mediodepago = req.body;
+    const {mediodepago} = req.body;
     if(mediodepago)
     {
-        const Nuevo = mediodepago;
-        RegistrarMediosdePago(Nuevo);
-        res.status(201).json({msg: 'Medio de pago creado con exito'});
+        const payment = MostrarMediosdePago().find(p => p.mediodepago === mediodepago);
+        if(!payment)
+        {
+            RegistrarMediosdePago(mediodepago);
+            res.status(201).json({msg:'medio de pago creado con exito'});
+        }
+        else
+        {
+            res.status(400).json({err: 'El medio de pago ya se encuentra registrado'});
+        }
+        
     }
-    else {
-        res.status(204).json({err: 'Faltan campos por llenar'});
-    }
+    else res.status(204).json({err: 'Faltan datos'});
 });
 
 router.put('/EditarMedioDePago/:id', EsAdministrador, (req, res) => {
-    
-    const payment = req.body;
-    if (payment) 
+    const {mediodepago} = req.body;
+    if (mediodepago) 
     {
         const id = Number(req.params.id);
-        MostrarMediosdePago().forEach(mediodepago => {
-            if(mediodepago.identificador === id)
+        MostrarMediosdePago().forEach(payment => {
+            if(payment.identificador === id)
             {
-                mediodepago.mediodepago=payment;
+                payment.mediodepago=mediodepago;
                 res.status(200).json({msg: 'Medio de pago editado con exito'});
             }
         });            
@@ -41,23 +46,14 @@ router.put('/EditarMedioDePago/:id', EsAdministrador, (req, res) => {
 });
 
 router.delete('/EliminarMedioDePago/:id', EsAdministrador, (req, res) => {
-    
-    const Mediosdepago = MostrarMediosdePago().filter(u => u.id === id);
-    if(Mediosdepago)
-    {
-        const id = Number(req.params.id);
-        MostrarMediosdePago().forEach(mediodepago => {
-            if(mediodepago.identificador === id)
-            {
-                MostrarMediosdePago().splice(id,1);
-                res.status(200).json({msg:'El medio de pago fue eliminado'});   
-            }
-        }); 
+    if (!MostrarMediosdePago().some(u => u.identificador == Number(req.params.id))){
+        return res.status(400).json("El medio de pago no esta registrado.")}
+    else {
+        const  payment = MostrarMediosdePago().find( u => u.identificador == Number(req.params.id));
+        MostrarMediosdePago().splice(MostrarMediosdePago().lastIndexOf(payment),1);
+        res.status(200).json({msg:'Medio de pago eliminado'});
     }
-    else 
-    {
-        res.status(204).json({err: 'Faltan campos por llenar'});
-    }
+
 });
 
 module.exports = router;
