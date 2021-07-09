@@ -1,9 +1,9 @@
 const express = require('express');
 const basicAuth = require('express-basic-auth');
 const {autorización} = require('./middlewares/usuarioexistente.middleware');
-const {EsAdministrador} = require('./middlewares/Administrador.middleware');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUI = require('swagger-ui-express');
+const {EsAdministrador} = require('./middlewares/Administrador.middleware')
 
 const pedidoRoutes = require('./routes/pedidos.routes');
 const usuarioRoutes = require('./routes/usuarios.routes');
